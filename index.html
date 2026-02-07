@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I have a question...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff0f3; /* Soft Pink */
+            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+            overflow: hidden;
+        }
+
+        #card {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 85%;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .gif-wrapper {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-height: 100%;
+            border-radius: 15px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 60px;
+            position: relative;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yes-btn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #yes-btn:hover {
+            transform: scale(1.1);
+        }
+
+        #no-btn {
+            background-color: #8a8a8a;
+            color: white;
+            position: absolute;
+            white-space: nowrap;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card">
+        <div class="gif-wrapper">
+            <img id="main-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZpZmd3bm00Znd4Ym8xa3p5NXF5cXFxcXFxcXFxcXFxcXFxcXF4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/qUIm5wu6LAAog/giphy.gif" alt="Please?">
+        </div>
+        <h1 id="text-prompt">Will you be my Valentine? 🌹</h1>
+        
+        <div class="btn-container">
+            <button id="yes-btn">YES! ✨</button>
+            <button id="no-btn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const mainGif = document.getElementById('main-gif');
+        const textPrompt = document.getElementById('text-prompt');
+
+        // Function to move the "No" button
+        function moveNoButton() {
+            // Get viewport dimensions
+            const padding = 50;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+            // Generate random position
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            noBtn.style.position = "fixed";
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        }
+
+        // Trigger move on hover (desktop)
+        noBtn.addEventListener('mouseover', moveNoButton);
+        
+        // Trigger move on touch (mobile)
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Click Yes logic
+        yesBtn.addEventListener('click', () => {
+            textPrompt.innerHTML = "YAY! Can't wait! ❤️✨";
+            // Celebratory GIF
+            mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZpZmd3bm00Znd4Ym8xa3p5NXF5cXFxcXFxcXFxcXFxcXFxcXF4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lH4ADRtAYnGsLe/giphy.gif";
+            
+            // Remove the No button and style the Yes button
+            noBtn.style.display = 'none';
+            yesBtn.style.transform = "scale(1.2)";
+            yesBtn.innerHTML = "I Love You!";
+            
+            // Add some confetti effect (optional)
+            document.body.style.backgroundColor = "#ffccd5";
+        });
+    </script>
+</body>
+  </html>
